@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
-
+    <h1>Category</h1>
+    <a class="btn btn-primary" href="{{ path('app_category_new') }}">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -23,8 +23,8 @@
                 <td>{{ category.status ? 'Yes' : 'No' }}</td>
                 <td>{{ category.featured ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+                    <a class="btn btn-secondary" href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +34,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_category_new') }}">Create new</a>
 {% endblock %}
