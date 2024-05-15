@@ -14,6 +14,7 @@ class CategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('status')
+            ->add('featured');
         ;
     }
 

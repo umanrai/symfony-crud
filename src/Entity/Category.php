@@ -19,6 +19,9 @@ class Category
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\Column]
+    private bool $featured = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,5 +49,21 @@ class Category
         $this->status = $status;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    /**
+     * @param bool $featured
+     */
+    public function setFeatured(bool $featured): void
+    {
+        $this->featured = $featured;
     }
 }
