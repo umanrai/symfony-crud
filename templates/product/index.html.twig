@@ -7,7 +7,7 @@
 
     <a class="btn btn-primary" href="{{ path('app_product_new') }}">Create new</a>
 
-    <table class="table">
+    <table class="table table-bordered table-striped mt-2">
         <thead>
             <tr>
                 <th>Id</th>
@@ -27,8 +27,11 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <a class="btn btn-secondary"  href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                    <div class="d-flex">
+                        <a class="btn btn-secondary me-2"  href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
+                        <a class="btn btn-primary me-2" href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
+                        {{ include('product/_delete_form.html.twig') }}
+                    </div>
                 </td>
             </tr>
         {% else %}
