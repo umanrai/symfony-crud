@@ -6,10 +6,12 @@ use App\Entity\Category;
 use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ProductType extends AbstractType
 {
@@ -33,7 +35,27 @@ class ProductType extends AbstractType
                     'rows' => '6',
                     'placeholder' => 'Enter the description'
                 ],
-            ]);
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Product (Image file)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '3000k',
+                        'mimeTypes' => [
+                            'image/*',
+//                            'application/pdf',
+//                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload an image',
+                    ])
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
