@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Category</h1>
     <a class="btn btn-primary" href="{{ path('app_category_new') }}">Create new</a>
-    <table class="table">
+    <table class="table table-bordered table-striped mt-2">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,8 +23,11 @@
                 <td>{{ category.status ? 'Yes' : 'No' }}</td>
                 <td>{{ category.featured ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a class="btn btn-secondary" href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+                    <div class="d-flex">
+                        <a class="btn btn-secondary me-2" href="{{ path('app_category_show', {'id': category.id}) }}"><i class="bi bi-book"></i></a>
+                        <a class="btn btn-primary me-2" href="{{ path('app_category_edit', {'id': category.id}) }}"><i class="bi bi-pencil-square"> </i></a>
+                        {{ include('category/_delete_form.html.twig') }}
+                    </div>
                 </td>
             </tr>
         {% else %}
