@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,23 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $imageFile = $form->get('categoryImage')->getData();
+
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $category->setImageFilename($imageFileName);
+            } else {
+                $category->setImageFilename('default_image.jpg');
+            }
+
             $entityManager->persist($category);
             $entityManager->flush();
 
@@ -51,12 +62,35 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Category $category, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('categoryImage')->getData();
+
+            if ($imageFile) {
+                $oldImageName = $category->getImageFilename();
+
+                $imageFileName = $fileUploader->upload($imageFile);
+                $category->setImageFilename($imageFileName);
+
+                if ($oldImageName && $oldImageName !== 'default_image.jpg'){
+                    // Define the path to the old image file
+                    $oldImageFilePath = $this->getParameter('image_directory') . '/' . $oldImageName;
+
+                    // Remove the old image file
+                    if (file_exists($oldImageFilePath)) {
+                        unlink($oldImageFilePath);
+                    }
+                } else {
+                    $image = $category->getImageFilename();
+                    $category->setImageFilename($image);
+                }
+
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
@@ -71,6 +105,21 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
+
+        $oldCategoryImageName = $category->getImageFilename();
+
+        if ($oldCategoryImageName && $oldCategoryImageName !== 'default_image.jpg') {
+            // Define the path to the old image file
+            $oldImageFilePath = $this->getParameter('image_directory') . '/' . $oldCategoryImageName;
+
+            // Remove the old image file
+            if (file_exists($oldImageFilePath)) {
+                unlink($oldImageFilePath);
+            }
+
+            $entityManager->flush();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();

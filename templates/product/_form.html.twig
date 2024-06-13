@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn btn-outline-secondary my-2">{{ button_label|default('Save') }}</button>
+    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ product.imageFilename) }}" style="width: 100px; " alt="{{ product.imageFilename }}">
+<br>
+    <button class="btn btn-outline-primary my-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

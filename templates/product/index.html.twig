@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Category</th>
                 <th>Name</th>
                 <th>Description</th>
@@ -19,16 +20,21 @@
             </tr>
         </thead>
         <tbody>
+
         {% for product in products %}
+
             <tr>
                 <td>{{ product.id }}</td>
+                <td>
+                    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ product.imageFilename) }}" style="width: 50px;height: 50px" alt="{{ product.imageFilename }}">
+                </td>
                 <td>{{ product.category ? product.category.name : 'Undefined'}}</td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
                 <td>
                     <div class="d-flex">
-                        <a class="btn btn-secondary me-2"  href="{{ path('app_product_show', {'id': product.id}) }}"><i class="bi bi-book"></i></a>
+                        <a class="btn btn-secondary me-2"  href="{{ path('app_product_show', {'id': product.id}) }}"><i class="bi bi-eye"></i></a>
                         <a class="btn btn-primary me-2" href="{{ path('app_product_edit', {'id': product.id}) }}"><i class="bi bi-pencil-square"></i></a>
                         {{ include('product/_delete_form.html.twig') }}
                     </div>
@@ -36,7 +42,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
