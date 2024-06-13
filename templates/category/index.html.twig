@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Status</th>
                 <th>Featured</th>
@@ -19,6 +20,9 @@
         {% for category in categories %}
             <tr>
                 <td>{{ category.id }}</td>
+                <td>
+                    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ category.imageFilename) }}" style="width: 50px;height: 50px" alt="{{ category.imageFilename }}">
+                </td>
                 <td>{{ category.name }}</td>
                 <td>{{ category.status ? 'Yes' : 'No' }}</td>
                 <td>{{ category.featured ? 'Yes' : 'No' }}</td>
@@ -32,7 +36,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -19,6 +19,12 @@
                 <th>Status</th>
                 <td>{{ category.status ? 'Yes' : 'No' }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ category.imageFilename) }}" style="width: 150px;" alt="{{ category.imageFilename }}">
+                </td>
+            </tr>
         </tbody>
     </table>
 

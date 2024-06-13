@@ -22,6 +22,9 @@ class Category
     #[ORM\Column]
     private bool $featured = false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $imageFilename = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,4 +69,21 @@ class Category
     {
         $this->featured = $featured;
     }
+
+    public function getImageFilename(): ?string
+    {
+        if (empty($this->imageFilename)) {
+            return 'default_image.jpg';
+        }
+
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
 }
