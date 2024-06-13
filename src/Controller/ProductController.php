@@ -104,7 +104,8 @@ class ProductController extends AbstractController
                 }
 
             } else {
-                $product->setImageFilename('default_image.jpg');
+                $image = $product->getImageFilename();
+                $product->setImageFilename($image);
             }
 
             $entityManager->flush();
@@ -121,6 +122,20 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
+        $oldImageName = $product->getImageFilename();
+
+        if ($oldImageName && $oldImageName !== 'default_image.jpg') {
+            // Define the path to the old image file
+            $oldImageFilePath = $this->getParameter('image_directory') . '/' . $oldImageName;
+
+            // Remove the old image file
+            if (file_exists($oldImageFilePath)) {
+                unlink($oldImageFilePath);
+            }
+
+            $entityManager->flush();
+        }
+
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
