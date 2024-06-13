@@ -23,6 +23,12 @@
                 <th>Price</th>
                 <td>{{ product.price }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ product.imageFilename) }}" style="width: 150px;" alt="{{ product.imageFilename }}">
+                </td>
+            </tr>
         </tbody>
     </table>
 

@@ -24,7 +24,7 @@
                 <td>{{ category.featured ? 'Yes' : 'No' }}</td>
                 <td>
                     <div class="d-flex">
-                        <a class="btn btn-secondary me-2" href="{{ path('app_category_show', {'id': category.id}) }}"><i class="bi bi-book"></i></a>
+                        <a class="btn btn-secondary me-2" href="{{ path('app_category_show', {'id': category.id}) }}"><i class="bi bi-eye"></i></a>
                         <a class="btn btn-primary me-2" href="{{ path('app_category_edit', {'id': category.id}) }}"><i class="bi bi-pencil-square"> </i></a>
                         {{ include('category/_delete_form.html.twig') }}
                     </div>
