@@ -40,7 +40,7 @@ class CategoryType extends AbstractType
                     ])
                 ],
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control image-input',
                 ],
             ])
         ;

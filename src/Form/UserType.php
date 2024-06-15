@@ -2,42 +2,33 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
-use App\Entity\Product;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class ProductType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
+            ->add('name',null, [
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('name', null, [
+            ->add('email', null, [
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('price', NumberType::class, [
-                'attr' => ['class' => 'form-control', 'type' => 'number'],
-            ])
-            ->add('description', TextareaType::class, [
+            ->add('password',PasswordType::class,[
                 'attr' => [
                     'class' => 'form-control',
-                    'rows' => '6',
-                    'placeholder' => 'Enter the description'
+                    'required' => false
                 ],
             ])
-            ->add('image', FileType::class, [
-                'label' => 'Product (Image file)',
+            ->add('userImage', FileType::class, [
+                'label' => 'User (Image file)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -61,7 +52,7 @@ class ProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => User::class,
         ]);
     }
 }

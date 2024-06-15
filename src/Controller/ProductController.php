@@ -109,6 +109,7 @@ class ProductController extends AbstractController
             }
 
             $entityManager->flush();
+            $this->addFlash('success', 'Product updated successfully!');
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -139,6 +140,7 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Product deleted successfully!');
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
     }
 
