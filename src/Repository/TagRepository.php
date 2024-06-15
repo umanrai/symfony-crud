@@ -16,4 +16,18 @@ class TagRepository extends ServiceEntityRepository
         parent::__construct($registry, Tag::class);
     }
 
+    /**
+     * Find the last inserted row
+     *
+     * @return Tag|null
+     */
+    public function findLast(): ?Tag
+    {
+        return $this->createQueryBuilder('tag')
+            ->orderBy('tag.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 }
