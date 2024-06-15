@@ -1,5 +1,5 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ category.imageFilename) }}" style="width: 150px;" alt="{{ category.imageFilename }}"> </br>
+    <img class="rounded-circle img-previewer" src="{{ asset('uploads/images/' ~ category.imageFilename) }}" style="width: 150px;" alt="{{ category.imageFilename }}"> </br>
     <button class="btn btn-outline-secondary my-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

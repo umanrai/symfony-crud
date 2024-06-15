@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180)]
     private ?string $name = null;
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private ?string $email = null;
 
     /**
@@ -30,10 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $imageFilename = null;
+
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
     #[ORM\Column]
@@ -52,12 +55,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
     public function getName(): ?string
     {
-        return $this->name;
+        return ucwords($this->name);
     }
 
     public function getEmail(): ?string
     {
-        return $this->name;
+        return $this->email;
     }
     public function setEmail(string $email): static
     {
@@ -134,4 +137,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getImageFilename(): ?string
+    {
+        if (empty($this->imageFilename)) {
+            return 'default_image.jpg';
+        }
+
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+
 }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table table-bordered table-striped mt-2">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>
+                    {{ user.name }}
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>
+                    {% for role in user.roles %}
+                        <span class="badge bg-secondary">{{ role }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                    <img class="rounded-circle" src="{{ asset('uploads/images/' ~ user.imageFilename) }}" style="width: 150px;" alt="{{ user.imageFilename }}">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_user_index') }}">back to list</a>
+
+{% endblock %}
