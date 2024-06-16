@@ -137,4 +137,9 @@ class Product
         return $this;
     }
 
+    public function getFullImageUrl()
+    {
+        return ('uploads/images/' . $this->getImageFilename());
+    }
+
 }

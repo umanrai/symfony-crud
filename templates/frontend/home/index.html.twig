@@ -1,1 +1,21 @@
 {% extends 'frontend/base.html.twig' %}
+
+{% block title %}
+    Home - One of the most wonderful ecommerce platform ever
+{% endblock %}
+
+{% block body %}
+    {% include 'frontend/_partials/_sidebar.html.twig' %}
+
+    {% include 'frontend/_partials/_banner.html.twig' %}
+
+    {% include 'frontend/_partials/_product.html.twig' %}
+
+    {% include 'frontend/_partials/_deal.html.twig' %}
+
+    {% include 'frontend/_partials/_testimonial.html.twig' %}
+
+    {% include 'frontend/_partials/_product2.html.twig' %}
+
+    {% include 'frontend/_partials/_subscribe.html.twig' %}
+{% endblock %}
