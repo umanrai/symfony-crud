@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Welcome!{% endblock %}</title>    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/icons.min.css">
+    <link rel="stylesheet" href="dist/css/plugins.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+</head>
+
+<body>
+
+    {% include 'frontend/_partials/_header.html.twig' %}
+
+    {% include 'frontend/_partials/_sidebar.html.twig' %}
+
+    {% include 'frontend/_partials/_banner.html.twig' %}
+
+    {% include 'frontend/_partials/_product.html.twig' %}
+
+    {% include 'frontend/_partials/_deal.html.twig' %}
+
+    {% include 'frontend/_partials/_testimonial.html.twig' %}
+
+    {% include 'frontend/_partials/_product2.html.twig' %}
+
+    {% include 'frontend/_partials/_subscribe.html.twig' %}
+
+    {% include 'frontend/_partials/_footer.html.twig' %}
+
+    {% include 'frontend/_partials/_modal.html.twig' %}
+
+<script src="dist/js/modernizr-3.11.7.min.js"></script>
+<script src="dist/js/jquery-v3.6.0.min.js"></script>
+<script src="dist/js/jquery-migrate-v3.3.2.min.js"></script>
+<script src="dist/js/popper.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="dist/js/plugins.js"></script>
+<script src="dist/js/ajax-mail.js"></script>
+<script src="dist/js/main.js"></script>
+
+</body>
+
+</html>
