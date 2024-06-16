@@ -104,24 +104,6 @@ class Product
         $this->category = $category;
     }
 
-    /**
-     * @return Category|null
-     */
-    public function getTag(): ?Category
-    {
-        return $this->tag;
-    }
-
-    /**
-     * @param Category|null $tag
-     */
-    public function setTag(?Category $tag): void
-    {
-        $this->tag = $tag;
-    }
-
-
-
     public function getImageFilename(): ?string
     {
         if (empty($this->imageFilename)) {
