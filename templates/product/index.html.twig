@@ -16,6 +16,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Tags</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +33,11 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
+                <td>
+                    {% for tag in product.tags %}
+                        <span class="badge bg-success">{{ tag.name }}</span>
+                    {% endfor %}
+                </td>
                 <td>
                     <div class="d-flex">
                         <a class="btn btn-secondary me-2"  href="{{ path('app_product_show', {'id': product.id}) }}"><i class="bi bi-eye"></i></a>

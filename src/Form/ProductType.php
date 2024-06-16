@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -22,6 +23,15 @@ class ProductType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'attr' => ['class' => 'form-control'],
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control',
+//                    'multiple' => true,
+                ],
+                'multiple' => true,
             ])
             ->add('name', null, [
                 'attr' => ['class' => 'form-control'],

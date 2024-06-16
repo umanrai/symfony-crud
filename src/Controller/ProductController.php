@@ -86,7 +86,6 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
-
             if ($imageFile) {
                 $oldImageName = $product->getImageFilename();
 
